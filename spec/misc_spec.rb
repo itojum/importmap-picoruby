@@ -1,4 +1,4 @@
-RSpec.describe PicoRubyImportmap::Glob do
+RSpec.describe ImportmapPicoRuby::Glob do
   it "matches * within one path segment" do
     expect(described_class.match?("plugins/*", "plugins/a")).to be true
     expect(described_class.match?("plugins/*", "plugins/a/b")).to be false
@@ -24,7 +24,7 @@ RSpec.describe PicoRubyImportmap::Glob do
   end
 end
 
-RSpec.describe PicoRubyImportmap::Npm do
+RSpec.describe ImportmapPicoRuby::Npm do
   describe ".split" do
     it "expands to jsDelivr" do
       expect(described_class.split("npm:picodx@1.2.0")).to eq(["https://cdn.jsdelivr.net/npm/picodx@1.2.0/", ""])
@@ -62,7 +62,7 @@ RSpec.describe PicoRubyImportmap::Npm do
   end
 end
 
-RSpec.describe PicoRubyImportmap::Pinned do
+RSpec.describe ImportmapPicoRuby::Pinned do
   it "treats exact npm versions as pinned" do
     expect(described_class.pinned?("https://cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx.rb")).to be true
     expect(described_class.pinned?("https://cdn.jsdelivr.net/npm/@me/x@1.0.0-beta.1/a.rb")).to be true
@@ -85,7 +85,7 @@ RSpec.describe PicoRubyImportmap::Pinned do
   end
 end
 
-RSpec.describe PicoRubyImportmap::Integrity do
+RSpec.describe ImportmapPicoRuby::Integrity do
   it "picks the strongest algorithm" do
     expect(described_class.parse("sha256-aaa sha384-bbb sha384-ccc")).to eq(["SHA-384", %w[bbb ccc]])
     expect(described_class.parse("sha512-x")).to eq(["SHA-512", ["x"]])
@@ -98,7 +98,7 @@ RSpec.describe PicoRubyImportmap::Integrity do
   it "makes a cache key per integrity value" do
     expect(described_class.cache_key("https://a.test/x.rb", nil)).to eq("https://a.test/x.rb")
     expect(described_class.cache_key("https://a.test/x.rb", "sha384-AB+/=")).to eq(
-      "https://a.test/x.rb?picoruby-importmap-integrity=sha384-AB+/="
+      "https://a.test/x.rb?importmap-picoruby-integrity=sha384-AB+/="
     )
   end
 end

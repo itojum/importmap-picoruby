@@ -6,19 +6,19 @@
 # URL handling is passed in as an object with two methods:
 #   join(base, ref)  => the absolute URL of ref against base, without its fragment
 #   split(url)       => [origin, host, path]  ("https://h:1", "h:1", "/a/b.rb")
-# In the browser it is PicoRubyImportmap::Browser::Url, backed by the browser's URL.
+# In the browser it is ImportmapPicoRuby::Browser::Url, backed by the browser's URL.
 
-module PicoRubyImportmap
+module ImportmapPicoRuby
   VERSION = "0.1.0"
   JSDELIVR = "https://cdn.jsdelivr.net/"
-  LOG_PREFIX = "[picoruby-importmap] "
+  LOG_PREFIX = "[importmap-picoruby] "
 end
 
-require_relative "picoruby_importmap/glob"
-require_relative "picoruby_importmap/npm"
-require_relative "picoruby_importmap/pinned"
-require_relative "picoruby_importmap/scanner"
-require_relative "picoruby_importmap/import_map"
-require_relative "picoruby_importmap/layout"
-require_relative "picoruby_importmap/crawler"
-require_relative "picoruby_importmap/integrity"
+require_relative "importmap_picoruby/glob"
+require_relative "importmap_picoruby/npm"
+require_relative "importmap_picoruby/pinned"
+require_relative "importmap_picoruby/scanner"
+require_relative "importmap_picoruby/import_map"
+require_relative "importmap_picoruby/layout"
+require_relative "importmap_picoruby/crawler"
+require_relative "importmap_picoruby/integrity"

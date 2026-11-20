@@ -40,8 +40,8 @@ jobs:
       - name: Check the tag matches VERSION in lib/
         run: |
           VERSION=$(jq -r .version package.json)
-          if ! grep -q "VERSION = \"$VERSION\"" lib/picoruby_importmap.rb; then
-            echo "::error::lib/picoruby_importmap.rb does not set VERSION = \"$VERSION\"."
+          if ! grep -q "VERSION = \"$VERSION\"" lib/importmap_picoruby.rb; then
+            echo "::error::lib/importmap_picoruby.rb does not set VERSION = \"$VERSION\"."
             exit 1
           fi
 

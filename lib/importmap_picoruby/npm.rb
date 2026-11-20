@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   module Npm
     # "npm:picodx@1.2.0/lib/x.rb" => ["https://cdn.jsdelivr.net/npm/picodx@1.2.0/", "lib/x.rb"]
     # The path is "" when the specifier names the package alone.

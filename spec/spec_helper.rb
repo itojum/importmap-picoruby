@@ -1,4 +1,4 @@
-require_relative "../lib/picoruby_importmap"
+require_relative "../lib/importmap_picoruby"
 require_relative "support/simple_url"
 
 RSpec.configure do |config|

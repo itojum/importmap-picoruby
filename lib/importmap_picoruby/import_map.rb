@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   class ImportMap
     attr_reader :imports, :integrity, :load_paths, :preload, :errors
 

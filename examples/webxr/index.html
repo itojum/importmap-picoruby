@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>picoruby-importmap: webxr-ruby placement check</title>
+<title>importmap-picoruby: webxr-ruby placement check</title>
 </head>
 <body>
 <pre id="log"></pre>
@@ -23,7 +23,7 @@
 }
 </script>
 <script>
-  for (const name of ["picoruby-importmap:ready", "picoruby-importmap:error"]) {
+  for (const name of ["importmap-picoruby:ready", "importmap-picoruby:error"]) {
     document.addEventListener(name, (e) => console.log(name, JSON.stringify({ ...e.detail, files: e.detail.files?.length })));
   }
 </script>

@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   class Browser
     # URL handling for the pure-Ruby part, by the browser's URL.
     module Url

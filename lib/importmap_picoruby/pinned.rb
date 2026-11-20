@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   # A URL whose content cannot change: an exact npm version or a git commit
   # on jsDelivr. Such URLs are read from the Cache API after the first fetch.
   module Pinned

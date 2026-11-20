@@ -1,6 +1,6 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   class Browser
-    CACHE_NAME = "picoruby-importmap-v1"
+    CACHE_NAME = "importmap-picoruby-v1"
 
     def initialize
       @console = JS.global[:console]
@@ -10,7 +10,7 @@ module PicoRubyImportmap
     def log_error(message, detail = {})
       @errors += 1
       @console.error(LOG_PREFIX + message)
-      dispatch("picoruby-importmap:error", { message: message }.merge(detail))
+      dispatch("importmap-picoruby:error", { message: message }.merge(detail))
     end
 
     def warn(message)
@@ -71,7 +71,7 @@ module PicoRubyImportmap
           log_error("cannot start #{filename}: a syntax error?", { url: app[:url].to_s })
         end
       end
-      dispatch("picoruby-importmap:ready", {
+      dispatch("importmap-picoruby:ready", {
         files: files.map { |f| f[0] },
         apps: started,
         warnings: crawler.warnings,

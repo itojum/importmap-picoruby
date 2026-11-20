@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   module Integrity
     ALGORITHMS = { "sha512" => "SHA-512", "sha384" => "SHA-384", "sha256" => "SHA-256" }
     STRENGTH = ["sha512", "sha384", "sha256"]
@@ -25,7 +25,7 @@ module PicoRubyImportmap
     def self.cache_key(url, integrity)
       return url if integrity.nil? || integrity.empty?
       sep = url.include?("?") ? "&" : "?"
-      url + sep + "picoruby-importmap-integrity=" + integrity.split(" ").join("_")
+      url + sep + "importmap-picoruby-integrity=" + integrity.split(" ").join("_")
     end
   end
 end

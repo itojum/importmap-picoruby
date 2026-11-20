@@ -1,4 +1,4 @@
-RSpec.describe PicoRubyImportmap::Scanner do
+RSpec.describe ImportmapPicoRuby::Scanner do
   def scan(src)
     described_class.scan(src)
   end
