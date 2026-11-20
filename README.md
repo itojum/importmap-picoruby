@@ -171,37 +171,6 @@ document.addEventListener("picoruby-importmap:error", (e) => {
 If any loaded file calls `require_relative` and the runtime does not define it, a warning is
 shown once at startup.
 
-## Known limitations
-
-- **Until PicoRuby #548 is released, the files your app requires cannot use `await` at their top
-  level.** Use it inside methods. The app scripts themselves (`text/ruby-app`) can.
-- **`require_relative` does not work until PicoRuby supports it.** This tool does not define it at
-  run time. Files are placed at the right relative positions, so it will work once PicoRuby does.
-- PicoRuby 4.0.5's `require` has no guard against circular requires. The loader warns when it finds one.
-- `preload` globs match import map names only.
-- The scan is lexical, so rare ambiguous code (such as `x <<y`) may be misread. A false match
-  only produces a warning; it never stops the app.
-- `.mrb` files are not handled.
-- Apps are started with `picorb_create_task_with_filename`, which is not documented (the official
-  `init.iife.js` uses the same function).
-
-## Compared with picoruby-libs
-
-[picoruby-libs](https://github.com/itojum/picoruby-libs) replaces each `require` line with the
-library's source (inline expansion). picoruby-importmap puts the files in the VFS and lets
-PicoRuby's `require` load them.
-
-| | picoruby-libs | picoruby-importmap |
-|---|---|---|
-| Approach | Inline expansion of `require` lines | Files in the VFS, loaded by `require` |
-| Indented `require` (inside methods, etc.) | Not supported | Supported |
-| One library in several scripts | Evaluated once per script | Evaluated once |
-| `__FILE__` and line numbers | Changed | Same as the original file |
-| `require_relative` | — | Placed so it works once PicoRuby supports it |
-| Splitting your app (`./x`, `loadPaths`) | — | Supported |
-
-Name resolution (npm via jsDelivr, import maps) follows picoruby-libs.
-
 ## Development
 
 ```bash
