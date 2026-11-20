@@ -1,0 +1,28 @@
+{
+  "name": "picoruby-importmap",
+  "version": "0.1.0",
+  "description": "Import maps and `require` for PicoRuby.wasm",
+  "keywords": [
+    "picoruby.wasm",
+    "picoruby",
+    "wasm",
+    "importmap",
+    "ruby"
+  ],
+  "homepage": "https://github.com/itojum/importmap-picoruby#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itojum/importmap-picoruby.git"
+  },
+  "license": "MIT",
+  "files": [
+    "loader.rb",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bundle exec rake build",
+    "test": "bundle exec rake spec",
+    "prepublishOnly": "bundle exec rake build"
+  }
+}
