@@ -1,13 +1,13 @@
-RSpec.describe PicoRubyImportmap::Crawler do
+RSpec.describe ImportmapPicoRuby::Crawler do
   PAGE = "https://site.test/game/index.html"
   CDN = "https://cdn.jsdelivr.net/npm/picodx@1.2.0/"
 
   # server: URL => source. Records the batches it was asked for.
   def crawl(server, map_json: {}, apps: [], builtins: %w[js json], preload: [], entries: {})
-    map = PicoRubyImportmap::ImportMap.new(PAGE, SimpleUrl)
+    map = ImportmapPicoRuby::ImportMap.new(PAGE, SimpleUrl)
     map.add(map_json)
     entries.each { |base, url| map.set_package_entry(base, url) }
-    layout = PicoRubyImportmap::Layout.new(PAGE, SimpleUrl)
+    layout = ImportmapPicoRuby::Layout.new(PAGE, SimpleUrl)
     crawler = described_class.new(map, layout, SimpleUrl, builtins)
     apps.each { |a| a.is_a?(Array) ? crawler.add_app(*a) : crawler.add_app(a) }
     preload.each { |p| crawler.add_preload(p) }
@@ -35,7 +35,7 @@ RSpec.describe PicoRubyImportmap::Crawler do
     expect(files(c)).to eq(
       "/app/game/src/main.rb" => server["https://site.test/game/src/main.rb"],
       "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx.rb" => "module PicoDX; end\n",
-      "/lib/picodx.rb" => %(# picoruby-importmap\nrequire "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx"\n),
+      "/lib/picodx.rb" => %(# importmap-picoruby\nrequire "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx"\n),
     )
     expect(c.warnings).to eq([])
     expect(@batches.size).to eq(2) # main.rb, then picodx.rb (js is builtin)
@@ -111,7 +111,7 @@ RSpec.describe PicoRubyImportmap::Crawler do
     }
     c = crawl(server, map_json: { "imports" => { "picodx" => "#{CDN}lib/picodx.rb" } }, apps: ["https://site.test/game/main.rb"])
     expect(files(c)).to include(
-      "/lib/picodx/sprite.rb" => %(# picoruby-importmap\nrequire "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx/sprite"\n),
+      "/lib/picodx/sprite.rb" => %(# importmap-picoruby\nrequire "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/picodx/sprite"\n),
     )
   end
 

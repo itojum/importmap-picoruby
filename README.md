@@ -1,4 +1,4 @@
-# picoruby-importmap
+# importmap-picoruby
 
 Import maps and `require` for PicoRuby.wasm
 
@@ -6,7 +6,7 @@ Import maps and `require` for PicoRuby.wasm
 > Tested with PicoRuby.wasm 4.0.5.
 
 PicoRuby.wasm starts with an empty virtual file system (VFS), so `require "x"` raises
-`LoadError` in the browser. picoruby-importmap works like the HTML import map: it maps library
+`LoadError` in the browser. importmap-picoruby works like the HTML import map: it maps library
 names to URLs, fetches every file your app can `require` before the app runs, and writes them
 into the VFS. PicoRuby's own `require` then loads them. There is no build step; everything
 happens when the page loads.
@@ -27,7 +27,7 @@ happens when the page loads.
   "preload": ["plugins/*"]
 }
 </script>
-<script type="text/ruby" src="https://cdn.jsdelivr.net/npm/picoruby-importmap@0/loader.rb"></script>
+<script type="text/ruby" src="https://cdn.jsdelivr.net/npm/importmap-picoruby@0/loader.rb"></script>
 <script type="text/ruby-app" src="src/main.rb"></script>
 <script src="https://cdn.jsdelivr.net/npm/@picoruby/wasm-wasi@4.0.5/dist/init.iife.js"></script>
 ```
@@ -145,7 +145,7 @@ the VFS path above.
 
 ## Cache
 
-Fetched files are stored with the Cache API (`picoruby-importmap-v1`), keyed by URL + integrity.
+Fetched files are stored with the Cache API (`importmap-picoruby-v1`), keyed by URL + integrity.
 Only URLs whose content cannot change are read from the cache afterwards:
 
 - npm on jsDelivr with an exact version (`@2.1.2`; not `@2` or `@latest`)
@@ -160,10 +160,10 @@ Errors go to `console.error`; requires that cannot be fetched and similar proble
 `console.warn`. These events are dispatched on `document`:
 
 ```js
-document.addEventListener("picoruby-importmap:ready", (e) => {
+document.addEventListener("importmap-picoruby:ready", (e) => {
   // e.detail: { files: [VFS paths...], apps: number of apps started, warnings: [...], errors: number of errors }
 });
-document.addEventListener("picoruby-importmap:error", (e) => {
+document.addEventListener("importmap-picoruby:error", (e) => {
   // e.detail: { message, url? }
 });
 ```
@@ -185,10 +185,10 @@ bundle exec rake build
 ```
 
 - `lib/loader.rb`: the entry point of the generated file
-- `lib/picoruby_importmap.rb` and `lib/picoruby_importmap/*.rb`: the part with no browser
+- `lib/importmap_picoruby.rb` and `lib/importmap_picoruby/*.rb`: the part with no browser
   dependency (the scan, name resolution). It avoids Regexp, Struct and the like so that it runs
   on mruby.
-- `lib/picoruby_importmap/browser.rb` and `browser/`: fetching, the VFS, tasks, the cache
+- `lib/importmap_picoruby/browser.rb` and `browser/`: fetching, the VFS, tasks, the cache
 
 The build replaces each `require_relative` in `lib/loader.rb` (and the files it pulls in) with
 the file's contents, since PicoRuby.wasm starts with an empty file system.

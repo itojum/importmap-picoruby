@@ -1,4 +1,4 @@
-# picoruby-importmap -- Import maps and `require` for PicoRuby.wasm
+# importmap-picoruby -- Import maps and `require` for PicoRuby.wasm
 #
 # An unofficial loader. It reads <script type="text/ruby-importmap"> and
 # <script type="text/ruby-app"> from the page, fetches every file that the
@@ -7,9 +7,9 @@
 #
 # MIT License. https://github.com/itojum/importmap-picoruby
 
-require_relative "picoruby_importmap"
+require_relative "importmap_picoruby"
 require "js"
-require_relative "picoruby_importmap/browser/url"
-require_relative "picoruby_importmap/browser"
+require_relative "importmap_picoruby/browser/url"
+require_relative "importmap_picoruby/browser"
 
-PicoRubyImportmap::Browser.new.run
+ImportmapPicoRuby::Browser.new.run

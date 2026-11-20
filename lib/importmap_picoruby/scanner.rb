@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   # Collects the calls of require / require_relative / load with a string
   # literal argument, wherever they are: top level, methods, blocks,
   # conditionals. Strings, comments, heredocs, =begin/=end, regexps and

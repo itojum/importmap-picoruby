@@ -1,5 +1,5 @@
 {
-  "name": "picoruby-importmap",
+  "name": "importmap-picoruby",
   "version": "0.1.0",
   "description": "Import maps and `require` for PicoRuby.wasm",
   "keywords": [

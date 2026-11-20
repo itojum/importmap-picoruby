@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   # `*` and `?` do not cross "/", `**` does.
   module Glob
     def self.glob?(pattern)

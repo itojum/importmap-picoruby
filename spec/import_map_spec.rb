@@ -1,4 +1,4 @@
-RSpec.describe PicoRubyImportmap::ImportMap do
+RSpec.describe ImportmapPicoRuby::ImportMap do
   page = "https://example.com/game/index.html"
 
   def build(page, *jsons)
@@ -65,7 +65,7 @@ RSpec.describe PicoRubyImportmap::ImportMap do
   end
 end
 
-RSpec.describe PicoRubyImportmap::Layout do
+RSpec.describe ImportmapPicoRuby::Layout do
   layout = described_class.new("http://localhost:8080/game/index.html", SimpleUrl)
 
   it "mirrors app URLs of the page's origin under /app" do
@@ -91,7 +91,7 @@ RSpec.describe PicoRubyImportmap::Layout do
 
   it "writes stubs that require the real file" do
     expect(layout.stub_path("picodx")).to eq("/lib/picodx.rb")
-    expect(layout.stub_source("/lib/h/x/picodx.rb")).to eq(%(# picoruby-importmap\nrequire "/lib/h/x/picodx"\n))
+    expect(layout.stub_source("/lib/h/x/picodx.rb")).to eq(%(# importmap-picoruby\nrequire "/lib/h/x/picodx"\n))
   end
 
   it "keeps line 1 when adding the preamble" do

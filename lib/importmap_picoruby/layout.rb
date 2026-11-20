@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   # Where files go in the virtual file system. Positions in a URL tree are
   # kept, so a later `require_relative` resolves the same way it does on the
   # server:
@@ -39,7 +39,7 @@ module PicoRubyImportmap
 
     def stub_source(target)
       target = target.byteslice(0, target.bytesize - 3) if target.end_with?(".rb")
-      "# picoruby-importmap\nrequire #{target.inspect}\n"
+      "# importmap-picoruby\nrequire #{target.inspect}\n"
     end
 
     # $LOAD_PATH for the apps.

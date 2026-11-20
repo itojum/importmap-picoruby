@@ -1,4 +1,4 @@
-module PicoRubyImportmap
+module ImportmapPicoRuby
   # Follows requires from the apps' scripts and decides what to fetch. It
   # does no I/O itself: #run yields batches of URLs to fetch (in parallel)
   # and expects a Hash of URL => source (String) or nil (not found).
