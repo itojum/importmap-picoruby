@@ -87,18 +87,18 @@ RSpec.describe ImportmapPicoRuby::Crawler do
   end
 
   it "keeps the relative positions of require_relative files in a library" do
-    base = "https://cdn.jsdelivr.net/gh/ydah/webxr-ruby@79f501e/lib/"
+    base = "#{CDN}lib/"
     server = {
-      "https://site.test/game/main.rb" => %(require "webxr"\n),
-      "#{base}webxr.rb" => %(require_relative "webxr/version"\nrequire_relative "webxr/core/system"\n),
-      "#{base}webxr/version.rb" => "",
-      "#{base}webxr/core/system.rb" => %(require_relative "../version"\n),
+      "https://site.test/game/main.rb" => %(require "picodx"\n),
+      "#{base}picodx.rb" => %(require_relative "picodx/version"\nrequire_relative "picodx/core/system"\n),
+      "#{base}picodx/version.rb" => "",
+      "#{base}picodx/core/system.rb" => %(require_relative "../version"\n),
     }
-    c = crawl(server, map_json: { "imports" => { "webxr" => "#{base}webxr.rb" } }, apps: ["https://site.test/game/main.rb"])
-    root = "/lib/cdn.jsdelivr.net/gh/ydah/webxr-ruby@79f501e/lib/"
+    c = crawl(server, map_json: { "imports" => { "picodx" => "#{base}picodx.rb" } }, apps: ["https://site.test/game/main.rb"])
+    root = "/lib/cdn.jsdelivr.net/npm/picodx@1.2.0/lib/"
     expect(files(c).keys).to contain_exactly(
-      "/app/game/main.rb", "/lib/webxr.rb",
-      "#{root}webxr.rb", "#{root}webxr/version.rb", "#{root}webxr/core/system.rb",
+      "/app/game/main.rb", "/lib/picodx.rb",
+      "#{root}picodx.rb", "#{root}picodx/version.rb", "#{root}picodx/core/system.rb",
     )
     expect(c.uses_require_relative?).to be true
   end

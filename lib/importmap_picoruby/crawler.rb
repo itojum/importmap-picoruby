@@ -234,7 +234,7 @@ module ImportmapPicoRuby
         libdir = key.end_with?("/") ? nil : [package_libdir(url, key), key.split("/")[0]]
         return { candidates: [url], tree: :lib, libdir: libdir, stub: bare }
       end
-      # A library's require of its own files ("webxr/core" from webxr) is
+      # A library's require of its own files ("picodx/core" from picodx) is
       # looked up in its lib directory, as a gem's lib is on $LOAD_PATH.
       if from && from.tree == :lib && from.libdir && bare.start_with?(from.libdir[1] + "/")
         return { candidates: [from.libdir[0] + bare + ".rb"], tree: :lib, libdir: from.libdir, stub: bare }
