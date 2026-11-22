@@ -51,8 +51,8 @@ def start_scene
 end
 ```
 
-Working examples: [examples/basic](examples/basic/index.html) (picodx and an app split into
-files) and [examples/webxr](examples/webxr/index.html) (checks where webxr-ruby's files are placed).
+Working example: [examples/basic](examples/basic/index.html) (picodx and an app split into
+files).
 
 ## The import map
 
@@ -200,8 +200,8 @@ and the specs use a simple stand-in (`spec/support/simple_url.rb`).
 bundle exec rake spec
 ```
 
-To try the examples, build `loader.rb`, serve the repository root and open
-<http://localhost:8000/examples/basic/> or <http://localhost:8000/examples/webxr/>:
+To try the example, build `loader.rb`, serve the repository root and open
+<http://localhost:8000/examples/basic/>:
 
 ```bash
 bundle exec ruby -run -e httpd . -p 8000
